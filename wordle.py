@@ -1,6 +1,7 @@
 from english_words import english_words_set
 from collections import Counter
 import sys
+import random
 
 ### Listing all 5 letter words in the english language
 five_letter_words0 = []
@@ -15,6 +16,8 @@ for word in english_words_set:
 
 print("Available Words:",len(five_letter_words0))
 
+### Determining a score for each word based on how common its letters are, ignoring repeat letters
+### https://www.lexico.com/explore/which-letters-are-used-most
 frequency = {'e':11.1607,
             'm':3.0129,
             'a':8.4966,
@@ -50,6 +53,10 @@ for word in five_letter_words0:
             score += frequency[letter]
     options[word] = score
 sorted_options = {k: v for k, v in sorted(options.items(), key=lambda item: item[1],reverse = True)}
+
+first_guess = list(sorted_options.keys())[random.randint(0,50)]
+print()
+print('If you need a first guess, try this one:', first_guess)
 
 ### Running the user through their guesses and results and suggesting the next guess
 for guess_number in range(6):
